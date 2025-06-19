@@ -1,11 +1,45 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        name,
+        email,
+        role,
+        password,
+      };
+
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/users/signup",
+        payload
+      );
+      if (response.status === 201) {
+        setName("");
+        setEmail("");
+        setRole("");
+        setPassword("");
+        toast.success("User created successfully");
+        navigate("/login");
+      } else {
+        toast.error("User already exists");
+      }
+    } catch (err) {
+      toast.error("User already exists");
+      console.log(err);
+    }
+  };
 
   return (
     <div className="h-screen w-screen">
@@ -16,7 +50,7 @@ const SignUp = () => {
       <div className="flex justify-center items-center h-screen">
         <form
           className="border border-white w-full md:w-1/3 p-10 rounded-lg text-white z-50"
-          action=""
+          onSubmit={handleSubmit}
         >
           <h1 className="text-center text-2xl font-semibold">Welcome</h1>
           <div className="mt-10">

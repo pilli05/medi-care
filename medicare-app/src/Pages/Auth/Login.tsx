@@ -1,13 +1,36 @@
+import axios from "axios";
 import React, { useState } from "react";
-import "./Auth.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const Auth: React.FC = () => {
+const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      const payload = {
+        email,
+        password,
+      };
+
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/users/login",
+        payload
+      );
+      if (response.status === 200) {
+        setEmail("");
+        setPassword("");
+        toast.success("Login successfully");
+        navigate("/");
+      }
+    } catch (err) {
+      toast.error("Invalid email or password");
+      console.log(err);
+    }
   };
 
   return (
@@ -72,4 +95,4 @@ const Auth: React.FC = () => {
   );
 };
 
-export default Auth;
+export default Login;
