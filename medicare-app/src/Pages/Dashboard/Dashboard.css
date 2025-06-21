@@ -59,3 +59,37 @@
   color: white !important;
   border-radius: 5px !important;
 }
+
+.react-calendar__tile {
+  position: relative;
+}
+
+.react-calendar__tile.taken-pill::after {
+  content: "✓";
+  position: absolute;
+  top: 0px;
+  left: 80%;
+  transform: translateX(-70%);
+  width: 15px;
+  height: 15px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  color: #fff !important;
+}
+
+.react-calendar__tile.missed-pill::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 80%;
+  transform: translateX(-70%);
+  width: 15px;
+  height: 15px;
+  background-color: #ef5350;
+  border-radius: 50%;
+}
+
+.react-calendar__tile.today-pill {
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+}
