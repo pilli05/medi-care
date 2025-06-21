@@ -159,8 +159,8 @@ const Dashboard: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <p className="border border-[#e5e7eb] text-[0.75rem] font-semibold px-2 rounded-full">
-                  8:00 AM
+                <p className="border border-[#e5e7eb] text-[0.75rem] font-semibold px-2 rounded-full flex items-center">
+                  <IoTimeOutline className="mr-1 font-bold" size={15} /> 8:00 AM
                 </p>
               </div>
               <div className="flex flex-col items-center mt-5 mb-5 border border-dashed border-[#e5e7eb] rounded-lg p-5">
@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
               </div>
               <button className="bg-[#22c55e] text-white text-lg p-2 px-4 rounded-lg font-semibold w-full flex items-center justify-center">
                 <IoIosCheckmark className="mr-1" color="white" size={30} /> Mark
-                As Taken
+                as Taken
               </button>
             </div>
           )}
