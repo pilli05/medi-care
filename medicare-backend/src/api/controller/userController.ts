@@ -30,6 +30,18 @@ const userController = {
       res.status(400).json({ message: err.message });
     }
   },
+  getLoggedUserInfo: async (req: Request, res: Response): Promise<void> => {
+    const token = req.headers["authorization"]?.split(" ")[1] as string;
+
+    try {
+      const user = await userService.getLoggedUserInfo(token);
+      res.status(200).json({
+        userData: { name: user.name, email: user.email, role: user.role },
+      });
+    } catch (err: any) {
+      res.status(400).json({ message: err.message });
+    }
+  },
 };
 
 export default userController;

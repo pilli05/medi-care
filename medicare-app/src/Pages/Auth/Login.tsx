@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setIsAuthenticated } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,10 +24,14 @@ const Login: React.FC = () => {
         payload
       );
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
         setEmail("");
         setPassword("");
         toast.success("Login successfully");
-        navigate("/");
+        setIsAuthenticated(true);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
       }
     } catch (err) {
       toast.error("Invalid email or password");
@@ -34,7 +40,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen">
+    <div className="min-h-screen">
       <img
         src="/src/assets/hospital-bg.jpg"
         className="absolute h-screen w-screen blur-[2px]"

@@ -42,7 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-screen w-screen">
+    <div className="min-h-screen">
       <img
         src="/src/assets/hospital-bg.jpg"
         className="absolute h-screen w-screen blur-[2px]"

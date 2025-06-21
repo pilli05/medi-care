@@ -37,6 +37,18 @@ const userService = {
 
     return token;
   },
+
+  getLoggedUserInfo: async (token: string): Promise<any> => {
+    const decodedToken = jwt.verify(token, JWT_SECRET) as any;
+    if (!decodedToken) {
+      throw new Error("Invalid token!");
+    }
+    const user = await userRepository.findByEmail(decodedToken.email);
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    return user;
+  },
 };
 
 export default userService;
