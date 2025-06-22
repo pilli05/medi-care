@@ -96,7 +96,7 @@ const NotificationsTab = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-12 bg-white p-10 rounded-lg mb-2 border border-gray-300 mt-5">
+      <div className="col-span-12 bg-white p-5 md:p-10 rounded-lg mb-2 border border-gray-300 mt-5">
         <p className="text-2xl font-semibold flex items-center">
           <MdOutlineEmail className="mr-2" color="green" />
           Email Preview
@@ -118,7 +118,7 @@ const NotificationsTab = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-end  w-full">
+      <div className="col-span-12 flex justify-end ">
         <button
           className="bg-[#16a34a] text-white rounded-md px-3 py-2 text-sm font-[500] mt-3 cursor-pointer"
           onClick={() => alert("Notification settings saved")}
