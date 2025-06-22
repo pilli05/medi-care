@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const role = userDetails && String(userDetails.role);
 
   return (
-    <div className="bg-white flex justify-between px-46 items-center py-4 sticky top-0">
+    <div className="bg-white flex justify-between px-3 md:px-46 items-center py-4 sticky top-0 z-50">
       <div className="flex items-center space-x-4">
         <span className="bg-gradient-to-r from-[#3b82f6] to-[#22c55e] p-2 px-3 rounded-lg text-white font-bold text-xl">
           M
