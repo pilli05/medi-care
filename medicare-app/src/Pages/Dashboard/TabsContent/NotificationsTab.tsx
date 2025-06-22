@@ -3,7 +3,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import Switch from "react-switch";
 
-const NotificationsTab = () => {
+interface NotificationProps {
+  patients: { id: string; name: string; email: string };
+}
+
+const NotificationsTab: React.FC<NotificationProps> = ({ patients }) => {
   const [emailChecked, setEmailChecked] = useState(false);
   const [notificationChecked, setNotificationChecked] = useState(false);
   const [timeFrequency, setTimeFrequency] = useState("1");
@@ -103,12 +107,12 @@ const NotificationsTab = () => {
         </p>
         <div className="bg-[#f7fdff] mt-5 border border-gray-300 p-5 rounded">
           <p className="text-[#020817] text-sm font-[600]">
-            Subject: Medication Alert - Eleanor Thompson
+            {`Subject: Medication Alert - ${patients.name}`}
           </p>
           <p className="text-[#64748b] text-sm my-2">Hello,</p>
           <p className="text-[#64748b] text-sm my-2">
-            This is a reminder that Eleanor Thompson has not taken her
-            medication today.
+            {`This is a reminder that ${patients.name} has not taken her
+            medication today.`}
           </p>
           <p className="text-[#64748b] text-sm my-2">
             Please check with her to ensure she takes her prescribed medication.
@@ -121,7 +125,7 @@ const NotificationsTab = () => {
       <div className="col-span-12 flex justify-end ">
         <button
           className="bg-[#16a34a] text-white rounded-md px-3 py-2 text-sm font-[500] mt-3 cursor-pointer"
-          onClick={() => alert("Notification settings saved")}
+          onClick={() => alert("Notification settings sent successfully")}
         >
           Save Notification Settings
         </button>

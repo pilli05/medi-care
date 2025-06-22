@@ -1,12 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiUsers } from "react-icons/fi";
 import OverviewTab from "./TabsContent/OverviewTab";
 import ActivityTab from "./TabsContent/ActivityTab";
 import CalenderTab from "./TabsContent/CalenderTab";
 import NotificationsTab from "./TabsContent/NotificationsTab";
+import axios from "axios";
+import { useAuth } from "../../hooks/useAuth";
 
 const CareTakerDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { userDetails } = useAuth();
+  const [patients, setPatients] = useState({
+    id: "",
+    name: "",
+    email: "",
+  });
+
+  const getAllPatients = async () => {
+    const careTakerId = userDetails?.id;
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/v1/caretaker/patients/${careTakerId}`
+      );
+      setPatients(response.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllPatients();
+  }, [userDetails?.id]);
 
   return (
     <div className=" flex flex-col items-center justify-center  mt-7 mb-7 mx-5 md:mx-26">
@@ -20,7 +44,7 @@ const CareTakerDashboard = () => {
               Caretaker Dashboard
             </h1>
             <p className="text-lg text-white">
-              Monitoring Eleanor Thompson's medication adherence
+              {`Monitoring ${patients?.name}'s medication adherence`}
             </p>
           </div>
         </div>
@@ -88,7 +112,7 @@ const CareTakerDashboard = () => {
         ) : activeTab == "calender" ? (
           <CalenderTab />
         ) : (
-          <NotificationsTab />
+          <NotificationsTab patients={patients} />
         )}
       </div>
     </div>

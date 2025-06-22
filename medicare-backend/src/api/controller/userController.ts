@@ -36,7 +36,12 @@ const userController = {
     try {
       const user = await userService.getLoggedUserInfo(token);
       res.status(200).json({
-        userData: { name: user.name, email: user.email, role: user.role },
+        userData: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
       });
     } catch (err: any) {
       res.status(400).json({ message: err.message });

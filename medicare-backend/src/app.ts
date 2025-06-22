@@ -5,6 +5,7 @@ import cors from "cors";
 import userRouter from "./api/routes/userRouter";
 import db from "./db/medicareDB";
 import medicationRouter from "./api/routes/medicationRouter";
+import careTakerRouter from "./api/routes/careTakerRouter";
 
 const app = express();
 
@@ -17,6 +18,7 @@ db;
 
 app.use("/api/v1/auth/users", userRouter);
 app.use("/api/v1/medication", medicationRouter);
+app.use("/api/v1/caretaker", careTakerRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

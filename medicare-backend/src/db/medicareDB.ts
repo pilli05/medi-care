@@ -31,6 +31,16 @@ db.serialize(() => {
       FOREIGN KEY (medication_id) REFERENCES medications(id)
       UNIQUE (medication_id, date_taken)
       )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS caretaker_patients (
+        
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        caretaker_id INTEGER,
+        patient_id INTEGER,
+        FOREIGN KEY (caretaker_id) REFERENCES users(id),
+        FOREIGN KEY (patient_id) REFERENCES users(id)
+
+        )`);
 });
 
 export default db;
